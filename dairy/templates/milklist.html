@@ -1,0 +1,62 @@
+{% extends 'homepage.html' %}
+{% load static %}
+{% block additionalstyles%}
+<link rel="stylesheet" type="text/css" href="{% static "styles1.css" %}">
+{% endblock %}
+{% block content%}
+<div class="container">
+      <ol class="breadcrumb my-4">
+        <li class="breadcrumb-item active" style="color:white;">Dairy list</li>
+      </ol>
+
+        <table class="table table-bordered">
+        <thead class="thead-dark">
+        <tr>
+          <th class="umesh">Name</th>
+          <th>Quantity in litres</th>
+          <th>Date</th>
+          <th>Person</th>
+         
+        </tr>
+      </thead>
+      <tbody>
+        {% for milks in milk %}
+          <tr>
+            <td>
+              {{ milks.Name }}
+            </td>
+            <td class="align-middle">{{ milks.Quantity_of_milk}}</td>
+            <td class="align-middle">{{ milks.Date}}</td>
+            <td class="align-middle">{{ milks.Person_Name}}</td>
+            
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+
+<nav aria-label="Page navigation example">
+<ul class="pagination">
+        {% if milk.has_previous %}
+        
+        <li class="page-item"><a class="page-link" href="?page={{ milk.previous_page_number }}">&laquo;</a></li>
+        {% endif %}
+        {% for i in milk.paginator.page_range %}
+      {% if milk.number == i %}
+        <li class="page-item active"><span class="page-link">{{ i }} <span class="sr-only">(current)</span></span></li>
+      {% else %}
+        <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+      {% endif %}
+    	{% endfor %}
+     
+
+        {% if milk.has_next %}
+           <li class="page-item"> <a class="page-link" href="?page={{ milk.next_page_number }}">&raquo;</a></li>
+            {% endif %}
+</ul>
+</nav>
+
+
+ 
+</div>
+{% endblock %}

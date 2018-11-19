@@ -1,0 +1,44 @@
+{% extends 'homepage.html' %}
+{% load static %}
+{% block additionalstyles%}
+<link rel="stylesheet" type="text/css" href="{% static "styles1.css" %}">
+{% endblock %}
+{% block content%}
+<div class="container">
+      <ol class="breadcrumb my-4">
+        <li class="breadcrumb-item active" style="color:white;">Dairy list</li>
+      </ol>
+      {% if milk %}
+        <table class="table table-bordered">
+        <thead class="thead-dark">
+        <tr>
+          <th class="umesh">Name</th>
+          <th>Quantity in litres</th>
+          <th>Date</th>
+          <th>Person</th>
+         
+        </tr>
+      </thead>
+      <tbody>
+        {% for milks in milk %}
+          <tr>
+            <td>
+              {{ milks.Name }}
+            </td>
+            <td class="align-middle">{{ milks.Quantity_of_milk}}</td>
+            <td class="align-middle">{{ milks.Date}}</td>
+            <td class="align-middle">{{ milks.Person_Name}}</td>
+            
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+
+
+
+{% else %}
+ <h4>No list Found</h4>
+ {% endif %}
+</div>
+{% endblock %}
